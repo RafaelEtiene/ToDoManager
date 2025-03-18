@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ToDoManager.Application\ToDoManager.Application.csproj" />
+    <ProjectReference Include="..\ToDoManager.Shared\ToDoManager.Shared.csproj" />
   </ItemGroup>
 
 </Project>

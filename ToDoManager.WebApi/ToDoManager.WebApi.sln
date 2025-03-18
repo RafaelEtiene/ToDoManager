@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoManager.WebApi", "ToDoManager.WebApi\ToDoManager.WebApi.csproj", "{1EE8E8FD-7513-4B3E-A217-9DA0CD6807CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoManager.WebApi", "ToDoManager.WebApi\ToDoManager.WebApi.csproj", "{1EE8E8FD-7513-4B3E-A217-9DA0CD6807CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoManager.Domain", "ToDoManager.Domain\ToDoManager.Domain.csproj", "{202D29A7-E6CF-448D-BC70-06E460ADEDF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoManager.Domain", "ToDoManager.Domain\ToDoManager.Domain.csproj", "{202D29A7-E6CF-448D-BC70-06E460ADEDF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoManager.Infrastructure", "ToDoManager.Infrastructure\ToDoManager.Infrastructure.csproj", "{78BA5EAF-5759-47AF-BAC5-C5A76570D642}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoManager.Infrastructure", "ToDoManager.Infrastructure\ToDoManager.Infrastructure.csproj", "{78BA5EAF-5759-47AF-BAC5-C5A76570D642}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoManager.Test", "ToDoManager.Test\ToDoManager.Test.csproj", "{F6916E49-7C3D-4948-A868-AE25D9216763}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoManager.Test", "ToDoManager.Test\ToDoManager.Test.csproj", "{F6916E49-7C3D-4948-A868-AE25D9216763}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoManager.Application", "ToDoManager.Application\ToDoManager.Application.csproj", "{8D9C6CA3-8535-45B0-9768-A7B9F724927A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoManager.Application", "ToDoManager.Application\ToDoManager.Application.csproj", "{8D9C6CA3-8535-45B0-9768-A7B9F724927A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoManager.Shared", "ToDoManager.Shared\ToDoManager.Shared.csproj", "{4D3760BE-5B4D-4A82-AD88-6F75DE43C3F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{8D9C6CA3-8535-45B0-9768-A7B9F724927A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D9C6CA3-8535-45B0-9768-A7B9F724927A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D9C6CA3-8535-45B0-9768-A7B9F724927A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D3760BE-5B4D-4A82-AD88-6F75DE43C3F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D3760BE-5B4D-4A82-AD88-6F75DE43C3F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D3760BE-5B4D-4A82-AD88-6F75DE43C3F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D3760BE-5B4D-4A82-AD88-6F75DE43C3F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

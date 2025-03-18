@@ -9,6 +9,15 @@
   <ItemGroup>
     <ProjectReference Include="..\ToDoManager.Domain\ToDoManager.Domain.csproj" />
     <ProjectReference Include="..\ToDoManager.Infrastructure\ToDoManager.Infrastructure.csproj" />
+    <ProjectReference Include="..\ToDoManager.Shared\ToDoManager.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using ToDoManager.Application.Interfaces;
+using ToDoManager.Application.ViewModel;
+using ToDoManager.Shared.Exceptions;
 
 namespace ToDoManager.WebApi.Controllers
 {
@@ -20,7 +23,7 @@ namespace ToDoManager.WebApi.Controllers
         {
             try
             {
-                return Ok(await _service.GetTasksAsync());
+                return Ok();
             }
             catch(Exception ex)
             {

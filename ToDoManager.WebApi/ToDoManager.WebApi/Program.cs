@@ -1,9 +1,18 @@
+using AutoMapper;
 using FluentMigrator.Runner;
+using Library.Application.Mapper;
 using Microsoft.EntityFrameworkCore;
-using System;
+using ToDoManager.Application.Interfaces;
 using ToDoManager.Infrastructure.Data.Migrations;
+using ToDoManager.Infrastructure.Interfaces;
+using ToDoManager.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile<TaskProfile>();
+});
 
 builder.Services.AddFluentMigratorCore()
     .ConfigureRunner(runner => runner
@@ -16,8 +25,13 @@ builder.Services.AddFluentMigratorCore()
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddControllers();
+// IoC
+builder.Services.AddSingleton(configuration.CreateMapper());
+builder.Services.AddScoped<ITaskService, ITaskService>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

@@ -1,0 +1,46 @@
+﻿services:
+  api:
+    build:
+      context: ./ToDoManager.WebApi  # Caminho para o diretório da API
+    ports:
+      - "5000:8080"  # Expondo a API na porta 5000
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=productmanagerdb;User Id=sa;Password=Password123;
+    networks:
+      - productmanager-network
+
+  frontend:
+    build:
+      context: ./ToDoManager.Web  # Caminho para o diretório do Angular
+    ports:
+      - "4200:4200"  # Expondo o frontend na porta 4200
+    networks:
+      - productmanager-network
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password123  # Senha para o usuário 'sa'
+      - MSSQL_PID=Express  # Para versão Express (você pode mudar para 'Developer' ou 'Standard')
+    ports:
+      - "1433:1433"  # Expondo a porta 1433 para o SQL Server
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - productmanager-network
+    healthcheck:
+      test: ["CMD-SHELL", "sqlcmd -U sa -P Password123 -Q 'SELECT 1'"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+networks:
+  productmanager-network:
+
+volumes:
+  sqlserver_data:

@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
     <Folder Include="Data\Context\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
