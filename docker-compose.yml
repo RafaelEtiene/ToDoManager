@@ -1,13 +1,16 @@
-﻿services:
+﻿version: '3.8'
+
+services:
   api:
     build:
       context: ./ToDoManager.WebApi  # Caminho para o diretório da API
     ports:
       - "5000:8080"  # Expondo a API na porta 5000
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # Aguarda o SQL Server estar pronto
     environment:
-      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=productmanagerdb;User Id=sa;Password=Password123;
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=productmanagerdb;User Id=sa;Password=Password123;TrustServerCertificate=True;
     networks:
       - productmanager-network
 
@@ -25,7 +28,7 @@
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Password123  # Senha para o usuário 'sa'
-      - MSSQL_PID=Express  # Para versão Express (você pode mudar para 'Developer' ou 'Standard')
+      - MSSQL_PID=Express  # Para versão Express
     ports:
       - "1433:1433"  # Expondo a porta 1433 para o SQL Server
     volumes:
@@ -33,11 +36,11 @@
     networks:
       - productmanager-network
     healthcheck:
-      test: ["CMD-SHELL", "sqlcmd -U sa -P Password123 -Q 'SELECT 1'"]
-      interval: 5s
+      test: ["CMD-SHELL", "echo 'SELECT 1' | /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Password123"]
+      interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 10s
+      start_period: 20s
 
 networks:
   productmanager-network:

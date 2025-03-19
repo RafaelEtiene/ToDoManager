@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoManager.Application.Interfaces;
 using ToDoManager.Application.ViewModel;
+using ToDoManager.Domain.Model;
 using ToDoManager.Infrastructure.Interfaces;
 using ToDoManager.Shared.Exceptions;
 
@@ -36,6 +37,11 @@ namespace ToDoManager.Application.Services
         public Task<TaskViewModel> GetTaskById(int IdTask)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task InsertTaskAsync(TaskViewModel task)
+        {
+            await _taskRepository.InsertTaskAsync(_mapper.Map<TaskItem>(task));
         }
     }
 }

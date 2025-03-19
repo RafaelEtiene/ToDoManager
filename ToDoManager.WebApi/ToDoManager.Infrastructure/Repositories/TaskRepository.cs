@@ -22,9 +22,15 @@ namespace ToDoManager.Infrastructure.Repositories
             return await _context.Tasks.ToListAsync();
         }
 
-        public Task<TaskItem> GetTaskById(int IdTask)
+        public Task<TaskItem> GetTaskByIdAsync(int IdTask)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task InsertTaskAsync(TaskItem task)
+        {
+            _context.Tasks.Add(task);
+            await _context.SaveChangesAsync();
         }
     }
 }

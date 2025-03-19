@@ -7,10 +7,9 @@ using ToDoManager.Domain.Model;
 
 namespace ToDoManager.Infrastructure.Interfaces
 {
-    public interface ITaskRepository
+    public interface IUserRepository
     {
-        Task<IEnumerable<TaskItem>> GetTasksAsync();
-        Task<TaskItem> GetTaskByIdAsync(int IdTask);
-        Task InsertTaskAsync(TaskItem task);
+        Task<User> GetUserByNameAsync(string name);
+        Task InsertUserAsync(User user);
     }
 }

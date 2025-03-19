@@ -13,6 +13,11 @@ namespace Library.Application.Mapper
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
                 .ForMember(dest => dest.IsCompleted, opt => opt.MapFrom(src => src.IsCompleted));
+            CreateMap<TaskViewModel, TaskItem>()
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
+                .ForMember(dest => dest.IsCompleted, opt => opt.MapFrom(src => src.IsCompleted));
         }
     }
 }

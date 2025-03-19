@@ -30,5 +30,21 @@ namespace ToDoManager.WebApi.Controllers
                 return BadRequest($"An error ocurred during GetTasks. Error: {ex.Message}");
             }
         }
+
+        [HttpPost("InsertTask")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> InsertTask([FromBody]TaskViewModel taskViewModel)
+        {
+            try
+            {
+                await _service.InsertTaskAsync(taskViewModel);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"An error ocurred during GetTasks. Error: {ex.Message}");
+            }
+        }
     }
 }

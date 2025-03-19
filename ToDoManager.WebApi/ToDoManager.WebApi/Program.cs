@@ -3,6 +3,7 @@ using FluentMigrator.Runner;
 using Library.Application.Mapper;
 using Microsoft.EntityFrameworkCore;
 using ToDoManager.Application.Interfaces;
+using ToDoManager.Application.Services;
 using ToDoManager.Infrastructure.Data.Migrations;
 using ToDoManager.Infrastructure.Interfaces;
 using ToDoManager.Infrastructure.Repositories;
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = new MapperConfiguration(cfg =>
 {
     cfg.AddProfile<TaskProfile>();
+    cfg.AddProfile<UserProfile>();
 });
 
 builder.Services.AddFluentMigratorCore()
@@ -27,8 +29,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // IoC
 builder.Services.AddSingleton(configuration.CreateMapper());
-builder.Services.AddScoped<ITaskService, ITaskService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();

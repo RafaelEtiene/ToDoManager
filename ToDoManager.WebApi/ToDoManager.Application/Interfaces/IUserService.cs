@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoManager.Application.ViewModel;
+using ToDoManager.Domain.Model;
 
 namespace ToDoManager.Application.Interfaces
 {
-    public interface ITaskService
+    public interface IUserService
     {
-        Task<IEnumerable<TaskViewModel>> GetTasksAsync();
-        Task<TaskViewModel> GetTaskById(int IdTask);
-        Task InsertTaskAsync(TaskViewModel task);
+        Task<UserViewModel> GetUserByNameAsync(string userName);
+        Task InsertUserAsync(InsertUserViewModel user);
     }
 }

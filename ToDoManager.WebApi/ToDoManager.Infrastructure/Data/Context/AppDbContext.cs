@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToDoManager.Infrastructure.Model;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ToDoManager.Domain.Model;
 
 public class AppDbContext : DbContext
 {
