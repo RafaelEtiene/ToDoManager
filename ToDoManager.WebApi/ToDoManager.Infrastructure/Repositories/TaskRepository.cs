@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoManager.Domain.Model;
 using ToDoManager.Infrastructure.Interfaces;
+using ToDoManager.Shared.Exceptions;
 
 namespace ToDoManager.Infrastructure.Repositories
 {
@@ -30,6 +31,19 @@ namespace ToDoManager.Infrastructure.Repositories
         public async Task InsertTaskAsync(TaskItem task)
         {
             _context.Tasks.Add(task);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateStateTaskAsync(Guid idTask, bool isCompleted)
+        {
+            var task = await _context.Tasks.FindAsync(idTask);
+
+            if(task == null)
+            {
+                throw new BusinessException($"Task with id {idTask} not found.");
+            }
+
+            task.IsCompleted = isCompleted;
             await _context.SaveChangesAsync();
         }
     }

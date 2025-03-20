@@ -20,7 +20,6 @@ namespace ToDoManager.Infrastructure.Data.Migrations
 
             Create.Table("Tasks")
                 .WithColumn("Id").AsGuid().PrimaryKey().WithDefault(SystemMethods.NewGuid)
-                .WithColumn("UserId").AsGuid().NotNullable().ForeignKey("Users", "Id")
                 .WithColumn("Title").AsString(255).NotNullable()
                 .WithColumn("Description").AsString(int.MaxValue).Nullable()
                 .WithColumn("IsCompleted").AsBoolean().WithDefaultValue(false)

@@ -19,8 +19,7 @@ public class AppDbContext : DbContext
                 .HasMaxLength(100);
 
             entity.Property(u => u.PasswordHash)
-                .IsRequired()
-                .HasMaxLength(256);
+                .IsRequired();
 
             entity.Property(u => u.CreatedAt);
         });
@@ -39,11 +38,6 @@ public class AppDbContext : DbContext
             entity.Property(t => t.IsCompleted);
 
             entity.Property(t => t.CreatedAt);
-
-            entity.HasOne(t => t.User)
-                .WithMany(u => u.Tasks)
-                .HasForeignKey(t => t.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }

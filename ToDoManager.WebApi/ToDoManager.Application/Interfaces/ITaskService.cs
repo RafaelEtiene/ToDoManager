@@ -11,6 +11,7 @@ namespace ToDoManager.Application.Interfaces
     {
         Task<IEnumerable<TaskViewModel>> GetTasksAsync();
         Task<TaskViewModel> GetTaskById(int IdTask);
-        Task InsertTaskAsync(TaskViewModel task);
+        Task InsertTaskAsync(InsertTaskViewModel task);
+        Task UpdateStateTaskAsync(Guid idTask, bool isCompleted);
     }
 }
