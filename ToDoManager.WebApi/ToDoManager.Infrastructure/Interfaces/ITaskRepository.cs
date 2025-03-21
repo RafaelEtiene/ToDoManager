@@ -13,5 +13,7 @@ namespace ToDoManager.Infrastructure.Interfaces
         Task<TaskItem> GetTaskByIdAsync(int IdTask);
         Task InsertTaskAsync(TaskItem task);
         Task UpdateStateTaskAsync(Guid idTask, bool isCompleted);
+        Task UpdateTaskAsync(Guid id, string title, string description);
+        Task DeleteTaskAsync(Guid id);
     }
 }

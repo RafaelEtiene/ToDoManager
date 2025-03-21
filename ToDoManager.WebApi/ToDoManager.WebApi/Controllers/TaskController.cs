@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDoManager.Application.Interfaces;
 using ToDoManager.Application.ViewModel;
-using ToDoManager.Shared.Exceptions;
 
 namespace ToDoManager.WebApi.Controllers
 {
@@ -64,6 +63,40 @@ namespace ToDoManager.WebApi.Controllers
             catch (Exception ex)
             {
                 return BadRequest($"An error ocurred during UpdateStateTask. Error: {ex.Message}");
+            }
+        }
+
+        [Authorize]
+        [HttpPut("UpdateTask")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateTask([FromBody] UpdateTaskViewModel viewModel)
+        {
+            try
+            {
+                await _service.UpdateTaskAsync(viewModel);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"An error ocurred during UpdateTask. Error: {ex.Message}");
+            }
+        }
+
+        [Authorize]
+        [HttpDelete("DeleteTask")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteTask(Guid id)
+        {
+            try
+            {
+                await _service.DeleteTaskAsync(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"An error ocurred during DeleteTask. Error: {ex.Message}");
             }
         }
     }

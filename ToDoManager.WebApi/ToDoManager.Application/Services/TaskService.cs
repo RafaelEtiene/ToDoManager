@@ -39,14 +39,25 @@ namespace ToDoManager.Application.Services
             return _mapper.Map<TaskViewModel>(await _taskRepository.GetTaskByIdAsync(IdTask));
         }
 
-        public async Task InsertTaskAsync(InsertTaskViewModel task)
+        public async Task InsertTaskAsync(InsertTaskViewModel viewModel)
         {
-            await _taskRepository.InsertTaskAsync(_mapper.Map<TaskItem>(task));
+            await _taskRepository.InsertTaskAsync(_mapper.Map<TaskItem>(viewModel));
         }
 
         public async Task UpdateStateTaskAsync(Guid idTask, bool isCompleted)
         {
             await _taskRepository.UpdateStateTaskAsync(idTask, isCompleted);
         }
+
+        public async Task UpdateTaskAsync(UpdateTaskViewModel viewModel)
+        {
+            await _taskRepository.UpdateTaskAsync(viewModel.Id, viewModel.Title, viewModel.Description);
+        }
+
+        public async Task DeleteTaskAsync(Guid id)
+        {
+            await _taskRepository.DeleteTaskAsync(id);
+        }
+
     }
 }

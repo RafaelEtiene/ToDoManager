@@ -46,5 +46,33 @@ namespace ToDoManager.Infrastructure.Repositories
             task.IsCompleted = isCompleted;
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateTaskAsync(Guid id, string title, string description)
+        {
+            var task = await _context.Tasks.FindAsync(id);
+
+            if(task == null)
+            {
+                throw new BusinessException($"Task with id {id} not found.");
+            }
+
+            task.Title = title;
+            task.Description = description;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTaskAsync(Guid id)
+        {
+            var task = await _context.Tasks.FindAsync(id);
+
+            if (task == null)
+            {
+                throw new BusinessException($"Task with id {id} not found.");
+            }
+
+            _context.Tasks.Remove(task);
+            await _context.SaveChangesAsync();
+        }
     }
 }
