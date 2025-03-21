@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDoManager.Application.Interfaces;
 using ToDoManager.Application.ViewModel;
@@ -17,6 +18,7 @@ namespace ToDoManager.WebApi.Controllers
         }
 
         [HttpPost("Register")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromBody]LoginViewModel viewModel)
@@ -33,6 +35,7 @@ namespace ToDoManager.WebApi.Controllers
         }
 
         [HttpPost("Login")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login([FromBody] LoginViewModel viewModel)
