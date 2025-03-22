@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoginViewModel } from 'src/app/viewModel/loginViewModel';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -33,10 +34,12 @@ export class LoginComponent {
     if(this.newUser.password !== this.newPasswordConfirm){
       this.showError("A senha deve ser igual.");
     }
-
-    this.authService.Login(this.newUser).subscribe({
-      next: (response) => {
+    console.log(this.newUser)
+    this.authService.Register(this.newUser).subscribe({
+      next: () => {
         this.showInfo('Usuário registrado com sucesso!');
+  
+        this.hideModal("registerUserModal")
       },
       error: (error) => {
         console.error('Erro durante cadastro do usuário', error);
@@ -59,5 +62,23 @@ export class LoginComponent {
       positionClass: 'toast-top-right',
       closeButton: true
     });
+  }
+
+  hideModal(template: string){
+    let modal = document.getElementById(template);
+        if (modal) {
+          let bootstrapModal = bootstrap.Modal.getInstance(modal);
+          if (bootstrapModal) {
+            bootstrapModal.hide();
+          }
+        }
+  
+        // Remove manualmente o backdrop do Bootstrap (corrige o problema do cursor)
+        setTimeout(() => {
+          let backdrop = document.querySelector('.modal-backdrop');
+          if (backdrop) {
+            backdrop.remove();
+          }
+        }, 300);
   }
 }

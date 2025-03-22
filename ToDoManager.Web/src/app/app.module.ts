@@ -10,7 +10,6 @@ import { TaskComponent } from './pages/task/task.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
-    NoopAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right', // Define a posição no topo direito
+      timeOut: 3000, // Tempo antes de desaparecer (opcional)
+      closeButton: true, // Adiciona botão de fechar (opcional)
+      progressBar: true // Adiciona barra de progresso (opcional)
+    }),
     BrowserAnimationsModule 
   ],
   providers: [

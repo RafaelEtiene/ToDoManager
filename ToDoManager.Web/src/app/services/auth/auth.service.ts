@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoginViewModel } from 'src/app/viewModel/loginViewModel';
@@ -13,13 +13,15 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   Login(user: LoginViewModel): Observable<string> {
-    return this.http.post(`${this.apiUrl}/Login`, { username: user.username, // A propriedade username do LoginViewModel
+    return this.http.post(`${this.apiUrl}/Login`, { username: user.username,
       password: user.password 
       }, { responseType: 'text' });
   }
 
   Register(newUser: LoginViewModel): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Register`, { newUser });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  
+    return this.http.post<any>(`${this.apiUrl}/Register`, newUser, { headers });
   }
 
   Logout() {

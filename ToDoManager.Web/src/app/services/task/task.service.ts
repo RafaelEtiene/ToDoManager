@@ -36,6 +36,13 @@ export class TaskService {
   }
 
   updateTask(viewModel: UpdateTaskViewModel): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/UpdateStateTask`, { viewModel });
+    return this.http.put<void>(`${this.apiUrl}/UpdateTask`, {
+      id: viewModel.id,
+      title: viewModel.title,
+      description: viewModel.description
+    });
+  }
+  deleteTask(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/DeleteTask?id=${id}`);
   }
 }

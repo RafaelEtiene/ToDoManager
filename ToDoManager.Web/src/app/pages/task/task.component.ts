@@ -47,6 +47,8 @@ export class TaskComponent implements OnInit {
       this.taskService.insertTask(this.newTask).subscribe({
         next: () => {
           this.showInfo('Tarefa criada com sucesso!');
+          this.hideModal('createTaskModal');
+          this.getTasks();
         },
         error: (error) => {
           this.showError('Falha ao tentar criar tarefa.');
@@ -56,7 +58,7 @@ export class TaskComponent implements OnInit {
     }
 
     updateStateTask(id: string, isCompleted: boolean){
-      this.taskService.updateStateTask(id, !isCompleted).subscribe();
+      this.taskService.updateStateTask(id, isCompleted).subscribe(e => this.getTasks());
     }
 
     editTask(task: TaskViewModel) {
@@ -78,6 +80,8 @@ export class TaskComponent implements OnInit {
       this.taskService.updateTask(updatedTask).subscribe({
         next: () => {
           this.showInfo('Tarefa atualizada com sucesso!');
+          this.hideModal('editTaskModal');
+          this.getTasks();
         },
         error: (error) => {
           this.showError('Falha ao atualizar tarefa.');
@@ -86,19 +90,42 @@ export class TaskComponent implements OnInit {
       });
     }
 
-    showError(message: string) {
-      this.toastr.error(message, 'Erro', {
-        timeOut: 3000,
-        positionClass: 'toast-top-right',
-        closeButton: true
+    deleteTask(id: string){
+      this.taskService.deleteTask(id).subscribe({
+        next: () => {
+          this.showInfo('Tarefa deletada com sucesso');
+          this.getTasks();
+        },
+        error: (error) => {
+          this.showError('Falha ao tentar deletar tarefa.');
+          console.error('Erro na remoção da tarefa', error);
+        }
       });
+    }
+
+    showError(message: string) {
+      this.toastr.error(message);
     }
   
     showInfo(message: string) {
-      this.toastr.info(message, 'Informação', {
-        timeOut: 3000,
-        positionClass: 'toast-top-right',
-        closeButton: true
-      });
+      this.toastr.info(message);
     }
+
+    hideModal(template: string){
+        let modal = document.getElementById(template);
+            if (modal) {
+              let bootstrapModal = bootstrap.Modal.getInstance(modal);
+              if (bootstrapModal) {
+                bootstrapModal.hide();
+              }
+            }
+      
+            // Remove manualmente o backdrop do Bootstrap (corrige o problema do cursor)
+            setTimeout(() => {
+              let backdrop = document.querySelector('.modal-backdrop');
+              if (backdrop) {
+                backdrop.remove();
+              }
+            }, 300);
+      }
 }
