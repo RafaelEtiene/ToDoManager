@@ -53,11 +53,11 @@ namespace ToDoManager.WebApi.Controllers
         [HttpPost("UpdateStateTask")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateStateTask([FromBody] Guid idTask, bool isCompleted)
+        public async Task<IActionResult> UpdateStateTask([FromBody] UpdateStateTaskViewModel viewModel)
         {
             try
             {
-                await _service.UpdateStateTaskAsync(idTask, isCompleted);
+                await _service.UpdateStateTaskAsync(viewModel.Id, viewModel.IsCompleted);
                 return Ok();
             }
             catch (Exception ex)

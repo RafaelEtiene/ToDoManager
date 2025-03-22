@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { InsertTaskViewModel } from 'src/app/viewModel/insertTaskViewModel';
 import { TaskViewModel } from 'src/app/viewModel/taskViewModel';
@@ -23,9 +23,16 @@ export class TaskService {
     return this.http.post<void>(`${this.apiUrl}/InsertTask`, task);
   }
 
-  // Método para atualizar o estado de uma tarefa (completa ou não)
-  updateStateTask(taskId: string, isCompleted: boolean): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/UpdateStateTask`, { idTask: taskId, isCompleted });
+  /**
+   * Atualiza o estado de uma tarefa (completa ou não)
+   * @param idTask ID da Tarefa
+   * @param isCompleted Status da tarefa (true = completa, false = pendente)
+   * @returns Observable<void>
+   */
+  updateStateTask(id: string, isCompleted: boolean): Observable<void> {
+    console.log(id + " " + isCompleted)
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<void>(`${this.apiUrl}/UpdateStateTask`, { id, isCompleted }, { headers });
   }
 
   updateTask(viewModel: UpdateTaskViewModel): Observable<void> {

@@ -13,8 +13,17 @@ import { UpdateTaskViewModel } from 'src/app/viewModel/updateTaskViewModel';
 })
 export class TaskComponent implements OnInit {
   tasks: TaskViewModel[] = [];
-  newTask!: InsertTaskViewModel;
-  selectedTask!: TaskViewModel;
+  newTask: InsertTaskViewModel = {
+    title: "",
+    description: ""
+  };
+  selectedTask: TaskViewModel = {
+    title: "",
+    description: "",
+    id: "",
+    createdAt: new Date(),
+    isCompleted: false
+  };
 
   constructor(private taskService: TaskService, private toastr: ToastrService){}
   ngOnInit(): void {
@@ -24,6 +33,7 @@ export class TaskComponent implements OnInit {
   getTasks(){
     this.taskService.getTasks().subscribe({
       next: (response) => {
+        console.log(response);
         this.tasks = response;
       },
       error: (error) => {
@@ -46,7 +56,7 @@ export class TaskComponent implements OnInit {
     }
 
     updateStateTask(id: string, isCompleted: boolean){
-      this.taskService.updateStateTask(id, !isCompleted).pipe();
+      this.taskService.updateStateTask(id, !isCompleted).subscribe();
     }
 
     editTask(task: TaskViewModel) {

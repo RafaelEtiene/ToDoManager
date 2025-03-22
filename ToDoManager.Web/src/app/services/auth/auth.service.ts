@@ -12,20 +12,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  Login(user: LoginViewModel): Observable<any> {
-    return this.http.post<string>(`${this.apiUrl}/Login`, 
-      { username: user.username, // A propriedade username do LoginViewModel
+  Login(user: LoginViewModel): Observable<string> {
+    return this.http.post(`${this.apiUrl}/Login`, { username: user.username, // A propriedade username do LoginViewModel
       password: user.password 
-      }).pipe(tap(response => {
-        if (response) {
-          localStorage.setItem('token', response);
-        }
-      })
-    );
+      }, { responseType: 'text' });
   }
 
   Register(newUser: LoginViewModel): Observable<any> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/Register`, { newUser });
+    return this.http.post<any>(`${this.apiUrl}/Register`, { newUser });
   }
 
   Logout() {

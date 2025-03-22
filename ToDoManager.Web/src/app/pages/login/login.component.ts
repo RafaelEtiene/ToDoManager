@@ -18,13 +18,13 @@ export class LoginComponent {
 
   login() {
     this.authService.Login(this.user).subscribe({
-      next: () => {
-        this.showInfo('Login bem-sucedido!');
-        this.router.navigate(['/task']); // 🔄 Redireciona para a página inicial após login
+      next: (token: string) => {
+        console.log('Token recebido:', token);
+        localStorage.setItem('token', token);
+        this.router.navigate(['/task']);
       },
       error: (error) => {
-        console.error('Erro no login', error);
-        this.showError('Usuário ou senha inválidos');
+        console.error('Erro ao fazer login:', error);
       }
     });
   }
