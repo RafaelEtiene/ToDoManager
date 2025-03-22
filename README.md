@@ -39,8 +39,9 @@ Migração esta configurada para rodar automaticamente.
 5. **Inicie o servidor da API:**
    Para rodar a API, execute o seguinte comando:
    ```bash
-   cd \ToDoManager\ToDoManager.WebApi\ToDoManager.WebApi
-   dotnet run --environment "Development"
+   cd \ToDoManager\ToDoManager.WebApi\ToDoManager.WebApi.sln
+
+   Abrir solution no Visual Studio e rodar no tipo IIS Express
    ```
 
 
